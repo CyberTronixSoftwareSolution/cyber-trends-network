@@ -12,9 +12,14 @@ import UserProfile from "./pages/user/UserProfile";
 import ServicePage from "./pages/user/service/ServicePage";
 import ChatPage from "./pages/user/chat/ChatPage";
 import NewWorkPage from "./pages/user/network/NewWorkPage";
+import AdminDashboardPage from "./pages/admin/AdminDashboardPage";
+import AdminUserPage from "./pages/admin/AdminUserPage";
+import AdminJobPage from "./pages/admin/AdminJobPage";
+import AdminCoursePage from "./pages/admin/AdminCoursePage";
+import AdminServicePage from "./pages/admin/AdminServicePage";
 
 function App() {
-  const [userType] = useState("user"); // Example: "user", "admin", "guest"
+  const [userType] = useState("admin"); // Example: "user", "admin", "guest"
 
   return (
     <>
@@ -32,7 +37,11 @@ function App() {
           </Route>
         ) : userType === "admin" ? (
           <Route element={<AdminLayout />}>
-            <Route path="/" element={<UserLogin />} />
+            <Route path="/admin" element={<AdminDashboardPage />} />
+            <Route path="/admin/users" element={<AdminUserPage />} />
+            <Route path="/admin/jobs" element={<AdminJobPage />} />\
+            <Route path="/admin/courses" element={<AdminCoursePage />} />
+            <Route path="/admin/services" element={<AdminServicePage />} />
           </Route>
         ) : (
           <Route path="/" element={<UserLogin />} />

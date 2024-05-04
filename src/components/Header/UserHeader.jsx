@@ -101,7 +101,7 @@ const UserHeader = () => {
             <Input
               placeholder={searchPlaceHolder}
               prefix={<SearchOutlined />}
-              style={{ width: 200 }}
+              style={{ width: 250 }}
               className="rounded-full ml-2 mr-2"
             />
             <Tooltip placement="bottom" title={"Jobs"}>

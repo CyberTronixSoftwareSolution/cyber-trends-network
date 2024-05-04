@@ -30,15 +30,4 @@ export const Jobs = [
     image:
       "https://res.cloudinary.com/dx1pvvqg7/image/upload/v1699205882/portfoliyo/logo-act_1_me09vc.png",
   },
-
-  {
-    _id: "4",
-    title: "Backend Developer",
-    description:
-      "We are looking for a backend developer with 2 years of experience",
-    experience: "2 years",
-    salary: "10k-20k",
-    image:
-      "https://res.cloudinary.com/dx1pvvqg7/image/upload/v1699205882/portfoliyo/logo-act_1_me09vc.png",
-  },
 ];

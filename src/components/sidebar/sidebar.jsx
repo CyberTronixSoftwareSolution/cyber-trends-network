@@ -4,12 +4,34 @@ import { IoBriefcaseOutline } from "react-icons/io5";
 import { MdSupportAgent } from "react-icons/md";
 
 import { Avatar, Layout, Menu } from "antd";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const { Sider } = Layout;
 
 const SideBar = (prop) => {
+  const [defaultSelectedKeys, setDefaultSelectedKeys] = useState(0);
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const path = location.pathname;
+
+  useEffect(() => {
+    const pathArr = path.split("/");
+    if (pathArr.includes("admin") && pathArr.includes("users")) {
+      setDefaultSelectedKeys(1);
+    } else if (pathArr.includes("admin") && pathArr.includes("jobs")) {
+      setDefaultSelectedKeys(3);
+    } else if (pathArr.includes("admin") && pathArr.includes("courses")) {
+      setDefaultSelectedKeys(2);
+    } else if (pathArr.includes("admin") && pathArr.includes("services")) {
+      setDefaultSelectedKeys(4);
+    } else if (pathArr.includes("admin")) {
+      setDefaultSelectedKeys(0);
+    }
+  }, [defaultSelectedKeys, path]);
+
+  console.log(defaultSelectedKeys);
   return (
     <Sider
       trigger={null}
@@ -56,7 +78,7 @@ const SideBar = (prop) => {
       <Menu
         theme="dark"
         mode="inline"
-        defaultSelectedKeys={["0"]}
+        selectedKeys={[defaultSelectedKeys.toString()]}
         items={[
           {
             key: "0",

@@ -47,6 +47,10 @@ const UserHeader = () => {
       placeholder = "Search Courses...";
     } else if (pathArr.includes("userService")) {
       placeholder = "Search Services...";
+    } else if (pathArr.includes("userNetwork")) {
+      placeholder = "Search Friends...";
+    } else if (pathArr.includes("userChat")) {
+      placeholder = "Search Chat...";
     }
 
     setSearchPlaceHolder(placeholder);
@@ -65,23 +69,27 @@ const UserHeader = () => {
             </h1>
           </span>
           <div className="flex items-center justify-end gap-2">
-            <Tooltip placement="bottom" title={"Friends"}>
-              <Button
-                type="text"
-                shape="circle"
-                icon={<UserAddOutlined />}
-                style={{ color: "white" }}
-              />
-            </Tooltip>
+            <Link to="/userNetwork">
+              <Tooltip placement="bottom" title={"Friends"}>
+                <Button
+                  type="text"
+                  shape="circle"
+                  icon={<UserAddOutlined />}
+                  style={{ color: "white" }}
+                />
+              </Tooltip>
+            </Link>
 
-            <Tooltip placement="bottom" title={"Chat"}>
-              <Button
-                type="text"
-                shape="circle"
-                icon={<MessageOutlined />}
-                style={{ color: "white" }}
-              />
-            </Tooltip>
+            <Link to="/userChat">
+              <Tooltip placement="bottom" title={"Chat"}>
+                <Button
+                  type="text"
+                  shape="circle"
+                  icon={<MessageOutlined />}
+                  style={{ color: "white" }}
+                />
+              </Tooltip>
+            </Link>
             <Tooltip placement="bottom" title={"Feedbacks"}>
               <Button
                 type="text"

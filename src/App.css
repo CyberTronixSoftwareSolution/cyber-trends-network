@@ -17,3 +17,8 @@
   background: #bbbbbb;
   border-radius: 10px;
 }
+
+.required:after {
+  content: " *";
+  color: red;
+}

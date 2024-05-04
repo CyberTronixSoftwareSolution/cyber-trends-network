@@ -10,6 +10,8 @@ import JobPage from "./pages/user/job/JobPage";
 import CoursePage from "./pages/user/course/CoursePage";
 import UserProfile from "./pages/user/UserProfile";
 import ServicePage from "./pages/user/service/ServicePage";
+import ChatPage from "./pages/user/chat/ChatPage";
+import NewWorkPage from "./pages/user/network/NewWorkPage";
 
 function App() {
   const [userType] = useState("user"); // Example: "user", "admin", "guest"
@@ -25,6 +27,8 @@ function App() {
             <Route path="/userCourse" element={<CoursePage />} />
             <Route path="/userProfile" element={<UserProfile />} />
             <Route path="/userService" element={<ServicePage />} />
+            <Route path="/userChat" element={<ChatPage />} />
+            <Route path="/userNetwork" element={<NewWorkPage />} />
           </Route>
         ) : userType === "admin" ? (
           <Route element={<AdminLayout />}>

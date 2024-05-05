@@ -5,11 +5,11 @@ import {
   UserAddOutlined,
   MessageOutlined,
   LogoutOutlined,
+  HomeOutlined,
 } from "@ant-design/icons";
 import { MdOutlineCastForEducation } from "react-icons/md";
 import { RiBriefcase4Line } from "react-icons/ri";
 import { SiConsul } from "react-icons/si";
-import { VscFeedback } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -69,6 +69,17 @@ const UserHeader = () => {
             </h1>
           </span>
           <div className="flex items-center justify-end gap-2">
+            <Link to="/">
+              <Tooltip placement="bottom" title={"Home"}>
+                <Button
+                  type="text"
+                  shape="circle"
+                  icon={<HomeOutlined />}
+                  style={{ color: "white", fontSize: "1.2rem" }}
+                />
+              </Tooltip>
+            </Link>
+
             <Link to="/userNetwork">
               <Tooltip placement="bottom" title={"Friends"}>
                 <Button
@@ -90,14 +101,6 @@ const UserHeader = () => {
                 />
               </Tooltip>
             </Link>
-            <Tooltip placement="bottom" title={"Feedbacks"}>
-              <Button
-                type="text"
-                shape="circle"
-                icon={<VscFeedback />}
-                style={{ color: "white", fontSize: "1.2rem" }}
-              />
-            </Tooltip>
             <Input
               placeholder={searchPlaceHolder}
               prefix={<SearchOutlined />}

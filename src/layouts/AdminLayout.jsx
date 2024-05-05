@@ -70,7 +70,7 @@ const AdminLayout = () => {
         <Breadcrumb.Item key="profile">Profile</Breadcrumb.Item>,
       ]);
       setPageTitle("Profile");
-    } else if (pathArr.includes("admin")) {
+    } else if (pathArr.includes("admin") && pathArr.includes("dashboard")) {
       setBreadcrumbItem([
         <Breadcrumb.Item key="dashboard">Dashboard</Breadcrumb.Item>,
       ]);

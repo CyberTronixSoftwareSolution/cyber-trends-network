@@ -3,7 +3,7 @@ import SignUp from "../../assets/images/signUp.png";
 
 const UserSignUp = () => {
   return (
-    <div className="h-[80vh] items-center flex justify-center px-5 lg:px-0">
+    <div className="h-[100vh] items-center flex justify-center px-5 lg:px-0">
       <div className="max-w-screen-xl h-[550px] bg-white border shadow sm:rounded-lg flex justify-center flex-1">
         <div className="flex-1 bg-violet-50 text-center hidden md:flex">
           <div

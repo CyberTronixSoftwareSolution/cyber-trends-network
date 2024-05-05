@@ -22,3 +22,23 @@
   content: " *";
   color: red;
 }
+
+.ant-carousel .slick-dots li button {
+  background: violet;
+  opacity: 0.4;
+}
+
+.ant-carousel .slick-dots li.slick-active button {
+  opacity: 1;
+  background: #ff4ef6;
+}
+
+/* nex buttons */
+.ant-carousel .slick-next {
+  color: #ff4ef6;
+}
+
+/* prev buttons */
+.ant-carousel .slick-prev {
+  color: #ff4ef6;
+}

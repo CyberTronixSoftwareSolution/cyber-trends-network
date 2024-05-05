@@ -31,7 +31,7 @@ const SideBar = (prop) => {
       setDefaultSelectedKeys(5);
     } else if (pathArr.includes("admin") && pathArr.includes("profile")) {
       setDefaultSelectedKeys(6);
-    } else if (pathArr.includes("admin")) {
+    } else if (pathArr.includes("admin") && pathArr.includes("dashboard")) {
       setDefaultSelectedKeys(0);
     }
   }, [defaultSelectedKeys, path]);
@@ -90,7 +90,7 @@ const SideBar = (prop) => {
             icon: <AiOutlineDashboard style={{ fontSize: "1.2rem" }} />,
             label: "Dashboard",
             onClick: () => {
-              navigate("/admin");
+              navigate("/admin/dashboard");
             },
           },
           {

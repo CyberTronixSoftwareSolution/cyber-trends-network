@@ -19,6 +19,10 @@ import AdminCoursePage from "./pages/admin/AdminCoursePage";
 import AdminServicePage from "./pages/admin/AdminServicePage";
 import AdminChatPage from "./pages/admin/AdminChatPage";
 import AdminProfilePage from "./pages/admin/AdminProfilePage";
+import AdminSignUp from "./pages/admin/AdminSignUpPage";
+import AdminLoginPage from "./pages/admin/AdminLoginPage";
+import UserHome from "./pages/user/UserHome";
+import LandingPage from "./pages/user/LandingPage";
 
 function App() {
   const [userType] = useState("user"); // Example: "user", "admin", "guest"
@@ -28,8 +32,7 @@ function App() {
       <Routes>
         {userType === "user" ? (
           <Route element={<UserLayout />}>
-            <Route path="/" element={<UserLogin />} />
-            <Route path="/signUp" element={<UserSignUp />} />
+            <Route path="/" element={<UserHome />} />
             <Route path="/userJob" element={<JobPage />} />
             <Route path="/userCourse" element={<CoursePage />} />
             <Route path="/userProfile" element={<UserProfile />} />
@@ -39,7 +42,7 @@ function App() {
           </Route>
         ) : userType === "admin" ? (
           <Route element={<AdminLayout />}>
-            <Route path="/admin" element={<AdminDashboardPage />} />
+            <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
             <Route path="/admin/users" element={<AdminUserPage />} />
             <Route path="/admin/jobs" element={<AdminJobPage />} />\
             <Route path="/admin/courses" element={<AdminCoursePage />} />
@@ -48,7 +51,13 @@ function App() {
             <Route path="/admin/profile" element={<AdminProfilePage />} />
           </Route>
         ) : (
-          <Route path="/" element={<UserLogin />} />
+          <>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/signIn" element={<UserLogin />} />
+            <Route path="/signUp" element={<UserSignUp />} />
+            <Route path="/admin/signUp" element={<AdminSignUp />} />
+            <Route path="/admin" element={<AdminLoginPage />} />
+          </>
         )}
       </Routes>
     </>

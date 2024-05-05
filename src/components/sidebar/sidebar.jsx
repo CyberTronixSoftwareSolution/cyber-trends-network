@@ -2,6 +2,7 @@ import { LuGraduationCap, LuUsers2 } from "react-icons/lu";
 import { AiOutlineDashboard } from "react-icons/ai";
 import { IoBriefcaseOutline } from "react-icons/io5";
 import { MdSupportAgent } from "react-icons/md";
+import { IoChatbubblesOutline } from "react-icons/io5";
 
 import { Avatar, Layout, Menu } from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -26,6 +27,10 @@ const SideBar = (prop) => {
       setDefaultSelectedKeys(2);
     } else if (pathArr.includes("admin") && pathArr.includes("services")) {
       setDefaultSelectedKeys(4);
+    } else if (pathArr.includes("admin") && pathArr.includes("chat")) {
+      setDefaultSelectedKeys(5);
+    } else if (pathArr.includes("admin") && pathArr.includes("profile")) {
+      setDefaultSelectedKeys(6);
     } else if (pathArr.includes("admin")) {
       setDefaultSelectedKeys(0);
     }
@@ -119,6 +124,14 @@ const SideBar = (prop) => {
             label: "Services",
             onClick: () => {
               navigate("/admin/services");
+            },
+          },
+          {
+            key: "5",
+            icon: <IoChatbubblesOutline style={{ fontSize: "1.2rem" }} />,
+            label: "Messenger",
+            onClick: () => {
+              navigate("/admin/chat");
             },
           },
         ]}

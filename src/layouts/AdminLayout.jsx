@@ -17,7 +17,7 @@ const { Header, Content } = Layout;
 const menu = (
   <Menu>
     <Menu.Item>
-      <Link to="/userProfile">
+      <Link to="/admin/profile">
         <a target="_blank" rel="noopener noreferrer">
           <UserOutlined /> Profile
         </a>
@@ -60,6 +60,16 @@ const AdminLayout = () => {
         <Breadcrumb.Item key="service">Services</Breadcrumb.Item>,
       ]);
       setPageTitle("Services Management");
+    } else if (pathArr.includes("admin") && pathArr.includes("chat")) {
+      setBreadcrumbItem([
+        <Breadcrumb.Item key="chat">Messenger</Breadcrumb.Item>,
+      ]);
+      setPageTitle("Messenger");
+    } else if (pathArr.includes("admin") && pathArr.includes("profile")) {
+      setBreadcrumbItem([
+        <Breadcrumb.Item key="profile">Profile</Breadcrumb.Item>,
+      ]);
+      setPageTitle("Profile");
     } else if (pathArr.includes("admin")) {
       setBreadcrumbItem([
         <Breadcrumb.Item key="dashboard">Dashboard</Breadcrumb.Item>,

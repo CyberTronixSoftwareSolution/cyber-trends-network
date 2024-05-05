@@ -26,3 +26,20 @@ export const Courses = [
     corseStart: "Apr 10, 2021",
   },
 ];
+
+export const EnrolledUsers = [
+  {
+    _id: "1",
+    course: "ReactJs from scratch with Redux",
+    user: "John Doe",
+    email: "johon@gmail.com",
+    date: "2022-12-31",
+  },
+  {
+    _id: "2",
+    course: "NodeJs from scratch",
+    user: "Nimna Thiranjaya",
+    email: "nimnathiranjaya@gmail.com",
+    date: "2022-12-31",
+  },
+];

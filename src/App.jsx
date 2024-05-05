@@ -17,9 +17,11 @@ import AdminUserPage from "./pages/admin/AdminUserPage";
 import AdminJobPage from "./pages/admin/AdminJobPage";
 import AdminCoursePage from "./pages/admin/AdminCoursePage";
 import AdminServicePage from "./pages/admin/AdminServicePage";
+import AdminChatPage from "./pages/admin/AdminChatPage";
+import AdminProfilePage from "./pages/admin/AdminProfilePage";
 
 function App() {
-  const [userType] = useState("admin"); // Example: "user", "admin", "guest"
+  const [userType] = useState("user"); // Example: "user", "admin", "guest"
 
   return (
     <>
@@ -42,6 +44,8 @@ function App() {
             <Route path="/admin/jobs" element={<AdminJobPage />} />\
             <Route path="/admin/courses" element={<AdminCoursePage />} />
             <Route path="/admin/services" element={<AdminServicePage />} />
+            <Route path="/admin/chat" element={<AdminChatPage />} />
+            <Route path="/admin/profile" element={<AdminProfilePage />} />
           </Route>
         ) : (
           <Route path="/" element={<UserLogin />} />

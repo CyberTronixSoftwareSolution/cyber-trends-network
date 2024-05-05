@@ -16,7 +16,7 @@ export const LoadingProvider = ({ children }) => {
   };
 
   const axiosInstance = axios.create({
-    baseURL: "https://catfact.ninja/",
+    baseURL: " https://backendnizz.onrender.com",
     headers: {
       "Content-Type": "application/json",
     },

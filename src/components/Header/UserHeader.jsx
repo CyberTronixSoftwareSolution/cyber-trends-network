@@ -1,4 +1,12 @@
-import { Input, Avatar, Button, Menu, Tooltip, Dropdown } from "antd";
+import {
+  Input,
+  Avatar,
+  Button,
+  Menu,
+  Tooltip,
+  Dropdown,
+  Popconfirm,
+} from "antd";
 import {
   SearchOutlined,
   UserOutlined,
@@ -10,31 +18,18 @@ import {
 import { MdOutlineCastForEducation } from "react-icons/md";
 import { RiBriefcase4Line } from "react-icons/ri";
 import { SiConsul } from "react-icons/si";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-
-const menu = (
-  <Menu>
-    <Menu.Item>
-      <Link to="/userProfile">
-        <a target="_blank" rel="noopener noreferrer">
-          <UserOutlined /> Profile
-        </a>
-      </Link>
-    </Menu.Item>
-
-    <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer">
-        <LogoutOutlined /> LogOut
-      </a>
-    </Menu.Item>
-  </Menu>
-);
+import { LocalStorageService } from "../../shared/localStorage.service";
+import { useAuth } from "../../shared/context/AuthContext";
 
 const UserHeader = () => {
   const [searchPlaceHolder, setSearchPlaceHolder] = useState("Search...");
+
+  const navigate = useNavigate();
   const location = useLocation();
+  const { setUser } = useAuth();
   const path = location.pathname;
 
   useEffect(() => {
@@ -56,6 +51,39 @@ const UserHeader = () => {
     setSearchPlaceHolder(placeholder);
   }, [path]);
 
+  const logout = () => {
+    LocalStorageService.removeUser();
+    setUser(null);
+    navigate("/signIn");
+  };
+
+  const menu = (
+    <Menu>
+      <Menu.Item>
+        <Link to="/userProfile">
+          <a target="_blank" rel="noopener noreferrer">
+            <UserOutlined /> Profile
+          </a>
+        </Link>
+      </Menu.Item>
+
+      <Popconfirm
+        title="Logout Confirmation"
+        description="Are you sure to logout?"
+        onConfirm={logout}
+        onCancel={() => {}}
+        okText="Yes"
+        cancelText="No"
+        placement="bottomLeft"
+      >
+        <Menu.Item>
+          <a target="_blank" rel="noopener noreferrer">
+            <LogoutOutlined /> LogOut
+          </a>
+        </Menu.Item>
+      </Popconfirm>
+    </Menu>
+  );
   return (
     <>
       <nav className="relative flex w-full bg-zinc-50 py-2 shadow-dark-mild dark:bg-violet-500 lg:py-4">

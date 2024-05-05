@@ -4,7 +4,7 @@ import "./App.css";
 import UserLayout from "./layouts/UserLayout";
 import AdminLayout from "./layouts/AdminLayout";
 import UserLogin from "./pages/user/UserLogin";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UserSignUp from "./pages/user/UserSignUp";
 import JobPage from "./pages/user/job/JobPage";
 import CoursePage from "./pages/user/course/CoursePage";
@@ -24,13 +24,25 @@ import AdminLoginPage from "./pages/admin/AdminLoginPage";
 import UserHome from "./pages/user/UserHome";
 import LandingPage from "./pages/user/LandingPage";
 
+import { useAuth } from "./shared/context/AuthContext";
+
 function App() {
-  const [userType] = useState(""); // Example: "user", "admin", "guest"
+  const [userType, setUserType] = useState("admin"); // Example: "user", "admin", "guest"
+
+  const { authUser } = useAuth();
+
+  useEffect(() => {
+    if (authUser) {
+      setUserType(authUser.role);
+    } else {
+      setUserType("");
+    }
+  }, [authUser]);
 
   return (
     <>
       <Routes>
-        {userType === "user" ? (
+        {userType === "User" ? (
           <Route element={<UserLayout />}>
             <Route path="/" element={<UserHome />} />
             <Route path="/userJob" element={<JobPage />} />

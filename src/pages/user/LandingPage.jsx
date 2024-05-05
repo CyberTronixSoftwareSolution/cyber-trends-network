@@ -22,6 +22,20 @@ const LandingPage = () => {
       });
   };
 
+  //   const handleImageUpload = async (e) => {
+  //     const file = e.target.files[0];
+  //     try {
+  //       const imageUrl = await uploadImageToCloudinary(
+  //         file,
+  //         "TestFold",
+  //         axiosInstance
+  //       );
+  //       setUploadImage(imageUrl);
+  //       console.log(imageUrl);
+  //     } catch (error) {
+  //       // Handle error
+  //     }
+  //   };
   return (
     <>
       {loading && <CustomLoading />}
@@ -76,6 +90,8 @@ const LandingPage = () => {
                   </a>
                 </div>
               </Link>
+
+              {/* <input type="file" onChange={handleImageUpload} /> */}
             </div>
           </div>
           <div className="w-1/2 flex justify-center align-middle">

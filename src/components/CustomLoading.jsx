@@ -6,7 +6,7 @@ const CustomLoading = () => {
       <div className="fixed top-0 left-0 z-50 w-full h-full bg-gray-900 bg-opacity-50">
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
           <div className="flex justify-center items-center">
-            <SyncLoader color="rgb(139 92 246)" margin={7} size={20} />
+            <SyncLoader color="rgb(139 92 246)" margin={6} size={20} />
           </div>
         </div>
       </div>

@@ -1,9 +1,31 @@
 import { Link } from "react-router-dom";
 import image from "../../assets/images/landing.png";
+import { useLoading } from "../../shared/context/LoadingContext";
+import { useEffect } from "react";
+import CustomLoading from "../../components/CustomLoading";
 
 const LandingPage = () => {
+  const { loading, axiosInstance } = useLoading();
+
+  useEffect(() => {
+    getCatFact();
+  }, []);
+
+  const getCatFact = async () => {
+    await axiosInstance
+      .get("/fact")
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
     <>
+      {loading && <CustomLoading />}
+
       <div className="bg-violet-100 ">
         <div className="flex justify-center items-center h-[100vh] px-5">
           <div className="w-1/2">

@@ -25,7 +25,7 @@ import UserHome from "./pages/user/UserHome";
 import LandingPage from "./pages/user/LandingPage";
 
 function App() {
-  const [userType] = useState("user"); // Example: "user", "admin", "guest"
+  const [userType] = useState(""); // Example: "user", "admin", "guest"
 
   return (
     <>

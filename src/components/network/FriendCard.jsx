@@ -48,7 +48,9 @@ const FriendCard = (prop) => {
           <Popconfirm
             title="Unfriend Confirmation"
             description="Are you sure to unfriend?"
-            onConfirm={() => {}}
+            onConfirm={() => {
+              prop.removeFriend(prop.friend._id);
+            }}
             onCancel={() => {}}
             okText="Yes"
             cancelText="No"

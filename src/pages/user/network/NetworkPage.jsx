@@ -170,6 +170,19 @@ const NetworkPage = () => {
     }
   };
 
+  // Remove friend
+  const removeFriend = async (friendId) => {
+    try {
+      const response = await axiosInstance.delete(
+        `/friend/removeFriend/${friendId}`
+      );
+      CustomToastService.success(response.data.message);
+      loadFriends();
+    } catch (error) {
+      CustomToastService.error(error.response.data.message);
+    }
+  };
+
   return (
     <>
       {loading && !showAddFriends && !showFriendRequests && <CustomLoading />}
@@ -201,9 +214,13 @@ const NetworkPage = () => {
         )}
 
         {friends.length > 0 && (
-          <div className="grid grid-cols-1 gap-11 md:grid-cols-1 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-11 md:grid-cols-1 lg:grid-cols-5 mt-4">
             {friends.map((friend) => (
-              <FriendCard key={friend._id} friend={friend} />
+              <FriendCard
+                key={friend._id}
+                friend={friend}
+                removeFriend={removeFriend}
+              />
             ))}
           </div>
         )}

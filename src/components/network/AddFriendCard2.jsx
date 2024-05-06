@@ -5,8 +5,12 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { LuUndo2 } from "react-icons/lu";
+import { useAuth } from "../../shared/context/AuthContext";
 
 const AddFriendCard2 = (prop) => {
+  const { authUser } = useAuth();
+  console.log(prop.friend);
+
   return (
     <>
       <div className="flex justify-between items-center p-3 bg-violet-100 rounded-lg">
@@ -30,7 +34,36 @@ const AddFriendCard2 = (prop) => {
           </div>
         </div>
 
-        {!prop.friend.isFriend ? (
+        {!prop.friend.isFriend && (
+          <Button
+            type="primary"
+            icon={<UserAddOutlined />}
+            onClick={() => prop.addFriend(prop.friend.user?._id)}
+          >
+            Add Friend
+          </Button>
+        )}
+
+        {prop.friend.isFriend &&
+          prop.friend.isFriend?.from._id == authUser.userId && (
+            <Button
+              type="primary"
+              icon={<LuUndo2 />}
+              style={{ backgroundColor: "gray", borderColor: "gray" }}
+              onClick={() =>
+                prop.removeFriendRequest(prop.friend.isFriend?._id)
+              }
+            >
+              Undo Request
+            </Button>
+          )}
+
+        {prop.friend.isFriend &&
+          prop.friend.isFriend?.to._id == authUser.userId && (
+            <Button disabled>Check Friend Requests</Button>
+          )}
+
+        {/* {!prop.friend.isFriend ? (
           <Button
             type="primary"
             icon={<UserAddOutlined />}
@@ -47,7 +80,7 @@ const AddFriendCard2 = (prop) => {
           >
             Undo Request
           </Button>
-        )}
+        )} */}
       </div>
     </>
   );

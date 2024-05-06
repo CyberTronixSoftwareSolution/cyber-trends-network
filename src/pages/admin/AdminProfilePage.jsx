@@ -18,7 +18,7 @@ import SkillCard from "../../components/profile/SkillCard";
 import { useState } from "react";
 
 const AdminProfilePage = () => {
-  const [loggedInUser] = useState("employee");
+  const [loggedInUser] = useState("consultant");
   return (
     <>
       <div className="relative flex flex-col mt-6 text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-full">

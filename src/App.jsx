@@ -11,7 +11,6 @@ import CoursePage from "./pages/user/course/CoursePage";
 import UserProfile from "./pages/user/UserProfile";
 import ServicePage from "./pages/user/service/ServicePage";
 import ChatPage from "./pages/user/chat/ChatPage";
-import NewWorkPage from "./pages/user/network/NewWorkPage";
 import AdminDashboardPage from "./pages/admin/AdminDashboardPage";
 import AdminUserPage from "./pages/admin/AdminUserPage";
 import AdminJobPage from "./pages/admin/AdminJobPage";
@@ -25,6 +24,7 @@ import UserHome from "./pages/user/UserHome";
 import LandingPage from "./pages/user/LandingPage";
 
 import { useAuth } from "./shared/context/AuthContext";
+import NetworkPage from "./pages/user/network/NetworkPage";
 
 function App() {
   const [userType, setUserType] = useState("admin"); // Example: "user", "admin", "guest"
@@ -50,7 +50,7 @@ function App() {
             <Route path="/userProfile" element={<UserProfile />} />
             <Route path="/userService" element={<ServicePage />} />
             <Route path="/userChat" element={<ChatPage />} />
-            <Route path="/userNetwork" element={<NewWorkPage />} />
+            <Route path="/userNetwork" element={<NetworkPage />} />
           </Route>
         ) : userType === "admin" ? (
           <Route element={<AdminLayout />}>

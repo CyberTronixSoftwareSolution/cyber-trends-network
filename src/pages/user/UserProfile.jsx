@@ -358,7 +358,7 @@ const UserProfile = () => {
         <div className="relative flex flex-col mt-6 text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-full">
           <div className="px-6 py-2 flex justify-between items-center">
             <div className="flex items-center gap-3">
-              {loggedInUser?.image != "user" ? (
+              {loggedInUser?.image != "" ? (
                 <Avatar
                   size={64}
                   src={<img src={loggedInUser?.image} alt="avatar" />}

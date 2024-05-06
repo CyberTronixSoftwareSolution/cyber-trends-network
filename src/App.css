@@ -42,3 +42,9 @@
 .ant-carousel .slick-prev {
   color: #ff4ef6;
 }
+
+.stroke-custom {
+  path {
+    stroke-width: 1.2px !important;
+  }
+}

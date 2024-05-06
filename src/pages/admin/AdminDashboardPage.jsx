@@ -14,6 +14,7 @@ const AdminDashboardPage = () => {
   // }
 
   // sendApiRequest();
+
   return <div>AdminDashboardPage</div>;
 };
 

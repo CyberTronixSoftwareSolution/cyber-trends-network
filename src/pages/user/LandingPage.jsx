@@ -16,6 +16,7 @@ const LandingPage = () => {
   //       // Handle error
   //     }
   //   };
+
   return (
     <>
       <div className="bg-violet-100 ">

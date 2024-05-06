@@ -13,9 +13,15 @@ const EducationCard = (prop) => {
               {prop.education?.degree}
             </h5>
             <div className="flex items-center gap-2">
-              <p className="text-sm text-gray-600">{prop.education?.school}</p>
+              <p className="text-sm text-gray-600">
+                {prop.education?.institute}
+              </p>
               <p className="text-sm font-semibold text-gray-600">
-                ({prop.education?.year})
+                (
+                {prop.education?.isPresent
+                  ? `${prop.education?.startYear} - Present`
+                  : `${prop.education?.startYear} - ${prop.education?.endYear}`}
+                )
               </p>
             </div>
           </div>

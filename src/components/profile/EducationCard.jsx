@@ -28,7 +28,9 @@ const EducationCard = (prop) => {
           <Popconfirm
             title="Delete Confirmation"
             description="Are you sure to delete this education qualification?"
-            onConfirm={() => {}}
+            onConfirm={() => {
+              prop.onDelete("education", prop.education?.id);
+            }}
             onCancel={() => {}}
             okText="Yes"
             cancelText="No"

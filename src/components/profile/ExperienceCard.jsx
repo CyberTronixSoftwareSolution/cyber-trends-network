@@ -31,7 +31,9 @@ const ExperienceCard = (prop) => {
           <Popconfirm
             title="Delete Confirmation"
             description="Are you sure to delete this experience?"
-            onConfirm={() => {}}
+            onConfirm={() => {
+              prop.onDelete("experience", prop.experience?.id);
+            }}
             onCancel={() => {}}
             okText="Yes"
             cancelText="No"

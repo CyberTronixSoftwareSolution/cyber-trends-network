@@ -256,6 +256,27 @@ const UserProfile = () => {
     }
   };
 
+  const deleteOption = async (type, id) => {
+    let request = {
+      type: type,
+      id: id,
+    };
+
+    try {
+      const response = await axiosInstance.put(
+        `/user/deleteOption/${authUser.userId}`,
+        request
+      );
+
+      if (response.data) {
+        CustomToastService.success(response.data.message);
+        fetchUserDetails();
+      }
+    } catch (error) {
+      CustomToastService.error(error.response.data.message);
+    }
+  };
+
   // Validations
   const validateUserDetails = (data) => {
     const errors = {};
@@ -413,7 +434,11 @@ const UserProfile = () => {
                 {educations.length === 0 && <DataNotFound name={"Education"} />}
 
                 {educations.map((education) => (
-                  <EducationCard education={education} key={education?.id} />
+                  <EducationCard
+                    education={education}
+                    key={education?.id}
+                    onDelete={deleteOption}
+                  />
                 ))}
               </div>
             </div>
@@ -445,7 +470,8 @@ const UserProfile = () => {
                 {experiences.map((experience) => (
                   <ExperienceCard
                     experience={experience}
-                    key={experience._id}
+                    key={experience.id}
+                    onDelete={deleteOption}
                   />
                 ))}
               </div>
@@ -474,7 +500,11 @@ const UserProfile = () => {
                 {skills.length === 0 && <DataNotFound name={"Skills"} />}
 
                 {skills.map((skill) => (
-                  <SkillCard skill={skill} key={skill._id} />
+                  <SkillCard
+                    skill={skill}
+                    key={skill.id}
+                    onDelete={deleteOption}
+                  />
                 ))}
               </div>
             </div>

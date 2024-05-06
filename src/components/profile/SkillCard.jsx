@@ -19,7 +19,9 @@ const SkillCard = (prop) => {
           <Popconfirm
             title="Delete Confirmation"
             description="Are you sure to delete this skill?"
-            onConfirm={() => {}}
+            onConfirm={() => {
+              prop.onDelete("skills", prop.skill?.id);
+            }}
             onCancel={() => {}}
             okText="Yes"
             cancelText="No"

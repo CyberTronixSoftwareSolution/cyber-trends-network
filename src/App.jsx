@@ -52,7 +52,9 @@ function App() {
             <Route path="/userChat" element={<ChatPage />} />
             <Route path="/userNetwork" element={<NetworkPage />} />
           </Route>
-        ) : userType === "admin" ? (
+        ) : userType === "Consultant" ||
+          userType === "Employee" ||
+          userType === "Businessman" ? (
           <Route element={<AdminLayout />}>
             <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
             <Route path="/admin/users" element={<AdminUserPage />} />

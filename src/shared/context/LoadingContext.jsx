@@ -17,7 +17,7 @@ export const LoadingProvider = ({ children }) => {
 
   // " https://backendnizz.onrender.com"
   const axiosInstance = axios.create({
-    baseURL: "http://localhost:5000",
+    baseURL: "https://backendnizz.onrender.com",
     headers: {
       "Content-Type": "application/json",
     },

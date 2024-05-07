@@ -1,8 +1,79 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useLoading } from "../../shared/context/LoadingContext";
+import { useAuth } from "../../shared/context/AuthContext";
+import { CustomToastService } from "../../shared/message.service";
+import { LocalStorageService } from "../../shared/localStorage.service";
+import CustomLoading from "../../components/CustomLoading";
 
 const AdminLoginPage = () => {
+  const [formData, setFormData] = useState({});
+  const [errors, setErrors] = useState({});
+
+  const { loading, axiosInstance } = useLoading();
+  const { setUser } = useAuth();
+
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    const validationErrors = validate(formData);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    } else {
+      setErrors({});
+    }
+    console.log("formData", formData);
+    try {
+      const response = await axiosInstance.post("/admin/login", formData);
+
+      if (response.data) {
+        console.log("response", response.data);
+        let user = response.data.existingUser;
+        user.role = user.type;
+        LocalStorageService.setUser(user);
+        setUser(user);
+        clearValues();
+        CustomToastService.success("User logged in successfully!");
+        navigate("/admin/dashboard");
+      }
+    } catch (error) {
+      CustomToastService.error(error.response.data.message);
+    }
+  };
+
+  const clearValues = () => {
+    setFormData({});
+  };
+
+  const validate = (data) => {
+    const errors = {};
+    if (!data.email || data.email === "") {
+      errors.email = "Email is required";
+    } else if (!isValidEmail(data.email)) {
+      errors.email = "Invalid email format";
+    }
+
+    if (!data.password) {
+      errors.password = "Password is required";
+    }
+
+    return errors;
+  };
+
+  const isValidEmail = (email) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
   return (
     <>
+      {loading && <CustomLoading />}
       <div className="bg-gray-50 font-[sans-serif] text-[#333]">
         <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4">
           <div className="max-w-md w-full border py-8 px-6 rounded border-gray-300 bg-white">
@@ -19,26 +90,39 @@ const AdminLoginPage = () => {
                 <label className="text-sm font-medium">Email address</label>
                 <input
                   name="email"
+                  id="email"
                   type="email"
                   required
                   className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-blue-500"
                   placeholder="Email address"
+                  onChange={handleChange}
+                  value={formData.email}
                 />
+                {errors.email && (
+                  <p className="text-red-500 text-xs">{errors.email}</p>
+                )}
               </div>
               <div>
                 <label className="text-sm font-medium">Password</label>
                 <input
                   name="password"
                   type="password"
+                  id="password"
                   required
                   className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-blue-500"
                   placeholder="Password"
+                  onChange={handleChange}
+                  value={formData.password}
                 />
+                {errors.password && (
+                  <p className="text-red-500 text-xs">{errors.password}</p>
+                )}
               </div>
               <div className="!mt-10">
                 <button
                   type="button"
                   className="w-full py-2.5 px-4 text-sm rounded text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"
+                  onClick={onSubmit}
                 >
                   Log in
                 </button>

@@ -11,26 +11,11 @@ import {
 } from "antd";
 import SideBar from "../components/sidebar/sidebar.jsx";
 import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { LocalStorageService } from "../shared/localStorage.service.js";
+import { useAuth } from "../shared/context/AuthContext.jsx";
 const { Header, Content } = Layout;
 
-const menu = (
-  <Menu>
-    <Menu.Item>
-      <Link to="/admin/profile">
-        <a target="_blank" rel="noopener noreferrer">
-          <UserOutlined /> Profile
-        </a>
-      </Link>
-    </Menu.Item>
-
-    <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer">
-        <LogoutOutlined /> LogOut
-      </a>
-    </Menu.Item>
-  </Menu>
-);
 const AdminLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [breadcrumbItem, setBreadcrumbItem] = useState([]);
@@ -40,6 +25,8 @@ const AdminLayout = () => {
   } = theme.useToken();
 
   const location = useLocation();
+  const navigate = useNavigate();
+  const { setUser } = useAuth();
   const path = location.pathname;
 
   useEffect(() => {
@@ -77,6 +64,36 @@ const AdminLayout = () => {
       setPageTitle("Dashboard");
     }
   }, [path]);
+
+  const logout = () => {
+    LocalStorageService.removeUser();
+    setUser(null);
+    navigate("/admin");
+  };
+
+  const menu = (
+    <Menu>
+      <Menu.Item>
+        <Link to="/admin/profile">
+          <a target="_blank" rel="noopener noreferrer">
+            <UserOutlined /> Profile
+          </a>
+        </Link>
+      </Menu.Item>
+
+      <Menu.Item>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => {
+            logout();
+          }}
+        >
+          <LogoutOutlined /> LogOut
+        </a>
+      </Menu.Item>
+    </Menu>
+  );
 
   return (
     <Layout

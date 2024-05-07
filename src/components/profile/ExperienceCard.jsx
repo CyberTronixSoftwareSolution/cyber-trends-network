@@ -32,7 +32,11 @@ const ExperienceCard = (prop) => {
             title="Delete Confirmation"
             description="Are you sure to delete this experience?"
             onConfirm={() => {
-              prop.onDelete("experience", prop.experience?.id);
+              if (prop?.isAdmin) {
+                prop.onDelete("workExperience", prop.experience?.id);
+              } else {
+                prop.onDelete("experience", prop.experience?.id);
+              }
             }}
             onCancel={() => {}}
             okText="Yes"

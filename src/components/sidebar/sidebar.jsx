@@ -36,7 +36,6 @@ const SideBar = (prop) => {
     }
   }, [defaultSelectedKeys, path]);
 
-  console.log(defaultSelectedKeys);
   return (
     <Sider
       trigger={null}

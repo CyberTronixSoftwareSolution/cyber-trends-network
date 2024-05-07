@@ -20,7 +20,11 @@ const SkillCard = (prop) => {
             title="Delete Confirmation"
             description="Are you sure to delete this skill?"
             onConfirm={() => {
-              prop.onDelete("skills", prop.skill?.id);
+              if (prop?.isAdmin) {
+                prop.onDelete("expertise", prop.skill?.id);
+              } else {
+                prop.onDelete("skills", prop.skill?.id);
+              }
             }}
             onCancel={() => {}}
             okText="Yes"

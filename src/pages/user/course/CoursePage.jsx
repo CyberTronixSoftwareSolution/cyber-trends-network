@@ -1,5 +1,7 @@
 import CourseCard from "../../../components/course/CourseCard";
 import { Courses } from "../../../data/course.data";
+import PropTypes from "prop-types";
+import { InboxOutlined } from "@ant-design/icons";
 
 const CoursePage = () => {
   return (
@@ -23,3 +25,16 @@ const CoursePage = () => {
 };
 
 export default CoursePage;
+
+const DataNotFound = ({ name }) => {
+  return (
+    <div className="flex flex-col justify-center items-center h-full">
+      <InboxOutlined style={{ fontSize: "50px" }} className="text-gray-400" />
+      <p className="text-gray-500">No {name} Found</p>
+    </div>
+  );
+};
+
+DataNotFound.propTypes = {
+  name: PropTypes.string,
+};

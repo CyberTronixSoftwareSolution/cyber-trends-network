@@ -3,16 +3,22 @@ import { AiOutlineDashboard } from "react-icons/ai";
 import { IoBriefcaseOutline } from "react-icons/io5";
 import { MdSupportAgent } from "react-icons/md";
 import { IoChatbubblesOutline } from "react-icons/io5";
-
+import { UserOutlined } from "@ant-design/icons";
 import { Avatar, Layout, Menu } from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useAuth } from "../../shared/context/AuthContext";
+import { useLoading } from "../../shared/context/LoadingContext";
+import CustomLoading from "../CustomLoading";
 
 const { Sider } = Layout;
 
 const SideBar = (prop) => {
   const [defaultSelectedKeys, setDefaultSelectedKeys] = useState(0);
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
+  const { authUser } = useAuth();
+  const { loading, axiosInstance } = useLoading();
 
   const location = useLocation();
   const path = location.pathname;
@@ -34,8 +40,20 @@ const SideBar = (prop) => {
     } else if (pathArr.includes("admin") && pathArr.includes("dashboard")) {
       setDefaultSelectedKeys(0);
     }
-  }, [defaultSelectedKeys, path]);
 
+    if (authUser.userId) {
+      getUser();
+    }
+  }, [defaultSelectedKeys, path, useAuth]);
+
+  const getUser = async () => {
+    try {
+      const response = await axiosInstance.get(`/admin/get/${authUser.userId}`);
+      setUser(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <Sider
       trigger={null}
@@ -48,29 +66,28 @@ const SideBar = (prop) => {
     >
       {prop.collapsed ? (
         <>
-          {" "}
-          <div className="flex items-center flex-col mt-4 mb-5">
-            <Avatar
-              size={40}
-              src="https://res.cloudinary.com/dx1pvvqg7/image/upload/v1694811676/interview/profile_image/file_v2xxfy.jpg"
-            />
-          </div>
+          {loading & <CustomLoading />}
+          {user.image ? (
+            <Avatar size={40} src={user.image} className="mt-4 mb-5" />
+          ) : (
+            <Avatar size={40} icon={<UserOutlined />} className="mt-4 mb-5" />
+          )}
         </>
       ) : (
         <>
           {/* Add avatar and logged user name  */}
           <div className="flex items-center flex-col mt-4 mb-5">
-            <Avatar
-              size={64}
-              src="https://res.cloudinary.com/dx1pvvqg7/image/upload/v1694811676/interview/profile_image/file_v2xxfy.jpg"
-            />
-
+            {user?.image ? (
+              <Avatar size={60} src={user?.image} />
+            ) : (
+              <Avatar size={40} icon={<UserOutlined />}></Avatar>
+            )}
             <div className="text-base font-bold leading-none tracking-tight text-white mt-5">
-              Nimna Thiranjaya
+              {user?.name}
             </div>
 
             <div className="text-sm font-semibold text-gray-300 mt-3">
-              Role : Admin
+              Role : {user?.type}
             </div>
 
             {/* divider */}

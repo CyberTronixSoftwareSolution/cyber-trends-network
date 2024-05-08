@@ -23,6 +23,7 @@ import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { LocalStorageService } from "../../shared/localStorage.service";
 import { useAuth } from "../../shared/context/AuthContext";
+import { useGlobalSearch } from "../../shared/context/GlobalSearchContext";
 
 const UserHeader = () => {
   const [searchPlaceHolder, setSearchPlaceHolder] = useState("Search...");
@@ -30,11 +31,14 @@ const UserHeader = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { setUser } = useAuth();
+  const { globalSearch, setGlobalSearchValue } = useGlobalSearch();
+
   const path = location.pathname;
 
   useEffect(() => {
     const pathArr = path.split("/");
     let placeholder = "Search...";
+    setGlobalSearchValue("");
 
     if (pathArr.includes("userJob")) {
       placeholder = "Search Jobs...";
@@ -134,6 +138,8 @@ const UserHeader = () => {
               prefix={<SearchOutlined />}
               style={{ width: 250 }}
               className="rounded-full ml-2 mr-2"
+              value={globalSearch}
+              onChange={(e) => setGlobalSearchValue(e.target.value)}
             />
             <Tooltip placement="bottom" title={"Jobs"}>
               <Link to="/userJob">

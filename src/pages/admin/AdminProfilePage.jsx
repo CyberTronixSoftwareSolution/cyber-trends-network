@@ -89,7 +89,7 @@ const AdminProfilePage = () => {
       setLoggedInUserRole(authUser.role);
       getUserProfile();
     }
-  }, [authUser]);
+  }, [authUser, loggedInUserRole]);
 
   // Get user profile
   const getUserProfile = async () => {
@@ -652,10 +652,10 @@ const AdminProfilePage = () => {
                 Company Information
               </h5>
 
-              <Tooltip title="Add Company Information" placement="right">
+              <Tooltip title="Edit Company Information" placement="right">
                 <Button
                   type="primary"
-                  icon={<PlusOutlined />}
+                  icon={<EditOutlined />}
                   onClick={() => setShowAddCompany(true)}
                 ></Button>
               </Tooltip>

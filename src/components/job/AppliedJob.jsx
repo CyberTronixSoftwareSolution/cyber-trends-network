@@ -1,31 +1,35 @@
 import { Input, Table } from "antd";
-import { AppliedUsers } from "../../data/job.data";
 import { SearchOutlined } from "@ant-design/icons";
+import { useEffect, useState } from "react";
+import { useLoading } from "../../shared/context/LoadingContext";
+import { useAuth } from "../../shared/context/AuthContext";
+import CustomLoading from "../CustomLoading";
 const columns = [
   {
-    title: "Id",
-    dataIndex: "_id",
-    key: "_id",
-  },
-  {
     title: "Job Title",
-    dataIndex: "title",
-    key: "title",
+    dataIndex: "position",
+    key: "position",
   },
   {
     title: "Company",
-    dataIndex: "company",
-    key: "company",
+    dataIndex: "companyName",
+    key: "companyName",
   },
   {
     title: "Experience",
     dataIndex: "experience",
     key: "experience",
+    render: (experience) => {
+      return experience + " Years";
+    },
   },
   {
     title: "Candidate Name",
-    dataIndex: "user",
-    key: "user",
+    dataIndex: "userId",
+    key: "userId",
+    render: (userId) => {
+      return userId.name;
+    },
   },
   {
     title: "Email",
@@ -33,21 +37,68 @@ const columns = [
     key: "email",
   },
   {
+    title: "Phone Number",
+    dataIndex: "userId",
+    key: "userId",
+    render: (userId) => {
+      return userId.phone;
+    },
+  },
+  {
     title: "Applied Date",
-    dataIndex: "date",
-    key: "date",
+    dataIndex: "createdAt",
+    key: "createdAt",
+    render: (createdAt) => {
+      return createdAt.split("T")[0];
+    },
   },
 ];
 const AppliedJob = () => {
+  const [appliedUsers, setAppliedUsers] = useState([]);
+  const [tempAppliedUsers, setTempAppliedUsers] = useState([]);
+
+  const { authUser } = useAuth();
+  const { loading, axiosInstance } = useLoading();
+
+  useEffect(() => {
+    getAllAppliedJobs();
+  }, [authUser.userId]);
+
+  const searchAppliedJobs = (e) => {
+    if (e.target.value === "") {
+      setAppliedUsers(tempAppliedUsers);
+    } else {
+      const filteredUsers = tempAppliedUsers.filter(
+        (user) =>
+          user.position.toLowerCase().includes(e.target.value.toLowerCase()) ||
+          user.userId.name.toLowerCase().includes(e.target.value.toLowerCase())
+      );
+      setAppliedUsers(filteredUsers);
+    }
+  };
+
+  const getAllAppliedJobs = async () => {
+    try {
+      const response = await axiosInstance.get(`/apply/all/${authUser.userId}`);
+      if (response.data) {
+        setAppliedUsers(response.data);
+        setTempAppliedUsers(response.data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
-      {" "}
+      {loading && <CustomLoading />}
       <div className="flex justify-end items-center mb-3">
         <Input
           size="middle"
           placeholder="Search Applied Job"
           prefix={<SearchOutlined />}
           style={{ width: 200 }}
+          onChange={searchAppliedJobs}
         />
       </div>
       <Table
@@ -55,7 +106,7 @@ const AppliedJob = () => {
           pageSize: 5,
         }}
         columns={columns}
-        dataSource={AppliedUsers}
+        dataSource={appliedUsers}
       />
     </>
   );

@@ -1,6 +1,6 @@
 import { Button, Input, Modal } from "antd";
 import { SendOutlined } from "@ant-design/icons";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useLoading } from "../../../shared/context/LoadingContext";
 import { useAuth } from "../../../shared/context/AuthContext";
 import { CustomToastService } from "../../../shared/message.service";
@@ -27,6 +27,14 @@ const ChatPage = () => {
 
   const { authUser } = useAuth();
   const { loading, axiosInstance } = useLoading();
+
+  const lastMessageRef = useRef();
+
+  useEffect(() => {
+    setTimeout(() => {
+      lastMessageRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, 100);
+  }, [messages]);
 
   useEffect(() => {
     getConversations();
@@ -252,6 +260,7 @@ const ChatPage = () => {
                           ? "bg-gray-300"
                           : "bg-blue-500"
                       } rounded justify-start  items-center gap-3 inline-flex`}
+                      ref={lastMessageRef}
                     >
                       <h5
                         className={`${

@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 import CustomLoading from "../../components/CustomLoading";
 import { useAuth } from "../../shared/context/AuthContext";
 import { useLoading } from "../../shared/context/LoadingContext";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ChatUserCard from "../../components/messanger/ChatUserCard";
 import ConversationCard from "../../components/messanger/ConversationCard";
 import { CustomToastService } from "../../shared/message.service";
@@ -35,6 +35,14 @@ const AdminChatPage = () => {
       getMessages();
     }
   }, [selectedConversation]);
+
+  const lastMessageRef = useRef();
+
+  useEffect(() => {
+    setTimeout(() => {
+      lastMessageRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, 100);
+  }, [messages]);
 
   const selectConversation = (conversationId) => {
     setSelectedConversation(conversationId);
@@ -243,6 +251,7 @@ const AdminChatPage = () => {
                         ? "bg-gray-300"
                         : "bg-blue-500"
                     } rounded justify-start  items-center gap-3 inline-flex`}
+                    ref={lastMessageRef}
                   >
                     <h5
                       className={`${

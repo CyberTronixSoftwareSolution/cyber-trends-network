@@ -1,11 +1,11 @@
 import { Carousel } from "antd";
 import AddFriendCard from "../../components/network/AddFriendCard";
-import { Jobs } from "../../data/job.data";
-import JobCard from "../../components/job/JobCard";
-import { Courses } from "../../data/course.data";
-import CourseCard from "../../components/course/CourseCard";
-import { Services } from "../../data/service.data";
-import ServiceCard from "../../components/service/ServiceCard";
+// import { Jobs } from "../../data/job.data";
+// import JobCard from "../../components/job/JobCard";
+// import { Courses } from "../../data/course.data";
+// import CourseCard from "../../components/course/CourseCard";
+// import { Services } from "../../data/service.data";
+// import ServiceCard from "../../components/service/ServiceCard";
 
 const UserHome = () => {
   return (
@@ -14,7 +14,7 @@ const UserHome = () => {
         <Carousel
           arrows={true}
           autoplay
-          autoplaySpeed={4000}
+          autoplaySpeed={3000}
           dotPosition="bottom"
           effect="scrollx"
           style={{ height: "420px" }}
@@ -75,9 +75,9 @@ const UserHome = () => {
           </span>
 
           <div className="grid grid-cols-1 gap-5 md:grid-cols-1 lg:grid-cols-3">
-            {Jobs.map((job) => (
+            {/* {Jobs.map((job) => (
               <JobCard key={job._id} job={job} />
-            ))}
+            ))} */}
           </div>
         </h1>
       </div>
@@ -89,9 +89,9 @@ const UserHome = () => {
           </span>
 
           <div className="grid grid-cols-1 gap-5 md:grid-cols-1 lg:grid-cols-2">
-            {Courses.map((course) => (
+            {/* {Courses.map((course) => (
               <CourseCard key={course._id} course={course} />
-            ))}
+            ))} */}
           </div>
         </h1>
       </div>
@@ -102,11 +102,11 @@ const UserHome = () => {
             Available Services
           </span>
 
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-1 lg:grid-cols-3">
+          {/* <div className="grid grid-cols-1 gap-5 md:grid-cols-1 lg:grid-cols-3">
             {Services.map((service) => (
               <ServiceCard key={service._id} service={service} />
             ))}
-          </div>
+          </div> */}
         </h1>
       </div>
     </>

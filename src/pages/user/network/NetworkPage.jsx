@@ -14,6 +14,7 @@ import FriendRequestCard from "../../../components/network/FriendRequestCard";
 import CustomLoading from "../../../components/CustomLoading";
 import PropTypes from "prop-types";
 import FriendCard from "../../../components/network/FriendCard";
+import { useGlobalSearch } from "../../../shared/context/GlobalSearchContext";
 
 const NetworkPage = () => {
   const [showAddFriends, setShowAddFriends] = useState(false);
@@ -24,15 +25,35 @@ const NetworkPage = () => {
   const [friendRequestsTemp, setFriendRequestsTemp] = useState([]);
 
   const [friends, setFriends] = useState([]);
+  const [tempFriends, setTempFriends] = useState([]);
 
   const { authUser } = useAuth();
   const { loading, axiosInstance } = useLoading();
+  const { globalSearch } = useGlobalSearch();
 
   useEffect(() => {
     if (authUser) {
       loadFriends();
     }
   }, [authUser]);
+
+  useEffect(() => {
+    search();
+  }, [globalSearch]);
+
+  const search = () => {
+    const searchValue = globalSearch.toLowerCase();
+    if (searchValue === "") {
+      setFriends(tempFriends);
+      return;
+    }
+
+    const filteredFriends = tempFriends.filter((friend) => {
+      return friend.name.toLowerCase().includes(searchValue);
+    });
+
+    setFriends(filteredFriends);
+  };
 
   // Load all friends
   const loadFriends = async () => {
@@ -41,7 +62,19 @@ const NetworkPage = () => {
         `/friend/allFriends/${authUser.userId}`
       );
 
-      setFriends(response.data.friends);
+      let friends = response.data.friends;
+
+      if (friends.length > 0) {
+        friends.map((friend) => {
+          friend.name =
+            authUser.userId == friend.from._id
+              ? friend.to.name
+              : friend.from.name;
+        });
+      }
+
+      setFriends(friends);
+      setTempFriends(friends);
     } catch (error) {
       console.log(error);
     }

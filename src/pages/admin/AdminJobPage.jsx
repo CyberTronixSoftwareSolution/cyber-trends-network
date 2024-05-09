@@ -250,7 +250,7 @@ const AdminJobPage = () => {
           />
           <Popconfirm
             title="Delete Confirmation"
-            description="Are you sure you want to delete this service?"
+            description="Are you sure you want to delete this job?"
             onConfirm={() => deleteJob(record._id)}
             onCancel={() => {}}
             okText="Yes"

@@ -11,7 +11,7 @@ import {
 } from "@ant-design/icons";
 import PropTypes from "prop-types";
 import ConversationCard from "../../../components/messanger/ConversationCard";
-import CustomLoading from "../../../components/CustomLoading";
+// import CustomLoading from "../../../components/CustomLoading";
 import ChatUserCard from "../../../components/messanger/ChatUserCard";
 
 const ChatPage = () => {
@@ -26,7 +26,7 @@ const ChatPage = () => {
   const [error, setError] = useState({});
 
   const { authUser } = useAuth();
-  const { loading, axiosInstance } = useLoading();
+  const { axiosInstance } = useLoading();
 
   const lastMessageRef = useRef();
 
@@ -308,7 +308,7 @@ const ChatPage = () => {
         maskClosable={false}
         footer={[]}
       >
-        {loading && <CustomLoading />}
+        {/* {loading && <CustomLoading />} */}
         <div className="flex flex-col justify-between w-full">
           {/* Search container */}
           <div className="w-full mb-4">

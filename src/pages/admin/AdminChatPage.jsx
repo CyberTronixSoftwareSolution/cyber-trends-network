@@ -6,7 +6,7 @@ import {
   SearchOutlined,
 } from "@ant-design/icons";
 import PropTypes from "prop-types";
-import CustomLoading from "../../components/CustomLoading";
+// import CustomLoading from "../../components/CustomLoading";
 import { useAuth } from "../../shared/context/AuthContext";
 import { useLoading } from "../../shared/context/LoadingContext";
 import { useEffect, useRef, useState } from "react";
@@ -26,7 +26,7 @@ const AdminChatPage = () => {
   const [error, setError] = useState({});
 
   const { authUser } = useAuth();
-  const { loading, axiosInstance } = useLoading();
+  const { axiosInstance } = useLoading();
 
   useEffect(() => {
     getConversations();
@@ -298,7 +298,7 @@ const AdminChatPage = () => {
         maskClosable={false}
         footer={[]}
       >
-        {loading && <CustomLoading />}
+        {/* {loading && <CustomLoading />} */}
         <div className="flex flex-col justify-between w-full">
           {/* Search container */}
           <div className="w-full mb-4">

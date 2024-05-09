@@ -24,21 +24,21 @@ const LandingPage = () => {
           <div className="w-1/2">
             <span className="text-xl text-black dark:text-white">
               <h1 className="text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-black">
-                CYBER{" "}
+                YOUNG{" "}
                 <mark className="px-2 text-white bg-blue-600 rounded dark:bg-blue-500">
-                  Trends
+                  NETWORK
                 </mark>
               </h1>
             </span>
             <h3 className="text-xl font-bold text-gray-600 mt-8">
-              Welcome to Cybertrends – where connections create opportunities!
+              Welcome to Young Network – where connections create opportunities!
             </h3>
             <p className="text-gray-600 mt-4">
-              Unlock your professional potential with Cybertrends, the premier
+              Unlock your professional potential with Young Network, the premier
               platform for networking, career development, and business growth.
               Whether you&apos;re a seasoned professional, an aspiring
-              entrepreneur, or a recent graduate, Cybertrends is your gateway to
-              a world of possibilities.
+              entrepreneur, or a recent graduate, Young Network is your gateway
+              to a world of possibilities.
             </p>
 
             <div className="flex justify-start mt-8 gap-2">

@@ -95,9 +95,9 @@ const AdminSignUp = () => {
           <div className="max-w-md w-full border py-8 px-6 rounded border-gray-300 bg-white">
             <span className="flex justify-center text-xl text-black dark:text-white">
               <h1 className="text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-2xl dark:text-black">
-                CYBER{" "}
+                YOUNG{" "}
                 <mark className="px-2 text-white bg-blue-600 rounded dark:bg-blue-500">
-                  Trends
+                  NETWORK
                 </mark>
               </h1>
             </span>

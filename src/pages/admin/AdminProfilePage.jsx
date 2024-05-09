@@ -314,8 +314,9 @@ const AdminProfilePage = () => {
 
       if (response.data) {
         setProfileImage(null);
-        CustomToastService.success("Company Information added successfully");
         setShowEditProfile(false);
+        clearFormData();
+        CustomToastService.success("Company Information added successfully");
         getUserProfile();
       }
     } catch (error) {
@@ -329,6 +330,7 @@ const AdminProfilePage = () => {
 
     setShowAddExp(false);
     setShowAddSkill(false);
+    setShowAddCompany(false);
     setShowAddCompany(false);
   };
 

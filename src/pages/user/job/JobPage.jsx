@@ -6,12 +6,16 @@ import { useEffect, useState } from "react";
 import { useGlobalSearch } from "../../../shared/context/GlobalSearchContext";
 import { useLoading } from "../../../shared/context/LoadingContext";
 import CustomLoading from "../../../components/CustomLoading";
+import { useAuth } from "../../../shared/context/AuthContext";
+import { CustomToastService } from "../../../shared/message.service";
 
 const JobPage = () => {
   const [job, setJobs] = useState([]);
   const [jobTemp, setJobsTemp] = useState([]);
 
   const { globalSearch } = useGlobalSearch();
+  const { authUser } = useAuth();
+
   const { loading, axiosInstance } = useLoading();
 
   useEffect(() => {
@@ -35,11 +39,25 @@ const JobPage = () => {
 
   const getJobs = async () => {
     try {
-      const response = await axiosInstance.get("/jobs/all");
+      const response = await axiosInstance.get(`/jobs/all/${authUser.userId}`);
       setJobs(response.data);
       setJobsTemp(response.data);
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const applyForJob = async (request) => {
+    try {
+      const response = await axiosInstance.post("/apply/add", request);
+      if (response.data) {
+        CustomToastService.success("Applied successfully!");
+        getJobs();
+        return true;
+      }
+    } catch (error) {
+      CustomToastService.error(error.response.data.error);
+      return false;
     }
   };
   return (
@@ -57,7 +75,7 @@ const JobPage = () => {
 
         <div className="grid grid-cols-1 gap-5 md:grid-cols-1 lg:grid-cols-3">
           {job.map((job) => (
-            <JobCard key={job._id} job={job} />
+            <JobCard key={job._id} job={job} applyForJob={applyForJob} />
           ))}
         </div>
       </div>

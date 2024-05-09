@@ -5,7 +5,7 @@ import { UserOutlined } from "@ant-design/icons";
 import { useAuth } from "../../shared/context/AuthContext";
 import { useLoading } from "../../shared/context/LoadingContext";
 import CustomLoading from "../CustomLoading";
-import { CustomToastService } from "../../shared/message.service";
+// import { CustomToastService } from "../../shared/message.service";
 
 const JobCard = (prop) => {
   const [isShow, setIsShow] = useState(false);
@@ -14,7 +14,7 @@ const JobCard = (prop) => {
 
   const [errors, setErrors] = useState({});
   const { authUser } = useAuth();
-  const { loading, axiosInstance } = useLoading();
+  const { loading } = useLoading();
 
   const [applyData, setApplyData] = useState({
     experience: 0,
@@ -48,14 +48,9 @@ const JobCard = (prop) => {
       email: applyData.email ? applyData.email : authUser.email,
     };
 
-    try {
-      const response = await axiosInstance.post("/apply/add", request);
-      if (response.data) {
-        CustomToastService.success("Applied successfully!");
-        clearApplyData();
-      }
-    } catch (error) {
-      CustomToastService.error(error.response.data.error);
+    let response = prop.applyForJob(request);
+    if (response) {
+      clearApplyData();
     }
   };
 
@@ -138,12 +133,16 @@ const JobCard = (prop) => {
             </div>
           </div>
           <div className="">
-            <Button
-              icon={<RightCircleOutlined />}
-              onClick={() => setIsShow(true)}
-            >
-              Apply
-            </Button>
+            {prop.job.applied ? (
+              <Button disabled>Applied</Button>
+            ) : (
+              <Button
+                icon={<RightCircleOutlined />}
+                onClick={() => setIsShow(true)}
+              >
+                Apply
+              </Button>
+            )}
           </div>
         </div>
       </div>

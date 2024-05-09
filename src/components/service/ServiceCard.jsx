@@ -1,5 +1,5 @@
-import { Avatar, Button } from "antd";
-import { RightCircleOutlined, UserOutlined } from "@ant-design/icons";
+import { Avatar } from "antd";
+import { UserOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 
 const ServiceCard = (prop) => {
@@ -44,7 +44,7 @@ const ServiceCard = (prop) => {
               <p className="text-gray-600">{usersSkill}</p>
             </div>
           </div>
-          <Button icon={<RightCircleOutlined />}>Hire Now</Button>
+          {/* <Button icon={<RightCircleOutlined />}>Hire Now</Button> */}
         </div>
       </div>
     </>

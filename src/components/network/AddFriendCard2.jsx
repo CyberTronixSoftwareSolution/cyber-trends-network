@@ -9,7 +9,6 @@ import { useAuth } from "../../shared/context/AuthContext";
 
 const AddFriendCard2 = (prop) => {
   const { authUser } = useAuth();
-  console.log(prop.friend);
 
   return (
     <>
@@ -60,7 +59,9 @@ const AddFriendCard2 = (prop) => {
 
         {prop.friend.isFriend &&
           prop.friend.isFriend?.to._id == authUser.userId && (
-            <Button disabled>Check Friend Requests</Button>
+            <Button type="primary" style={{ backgroundColor: "gray" }}>
+              Check Your Friend Request
+            </Button>
           )}
 
         {/* {!prop.friend.isFriend ? (

@@ -145,16 +145,29 @@ const AdminChatPage = () => {
     }
   };
 
-  //  load messages of the selected conversation every 2 seconds
-  //   useEffect(() => {
-  //     const interval = setInterval(() => {
-  //       if (selectedConversation !== null) {
-  //         getMessages();
-  //       }
-  //     }, 3000);
+  const loadMessagesSync = async () => {
+    if (selectedConversation !== null) {
+      const response = await axiosInstance.get(
+        `/conversation/allMessages/${selectedConversation}`
+      );
 
-  //     return () => clearInterval(interval);
-  //   }, [selectedConversation]);
+      if (response.data && response.data.length > messages.length) {
+        const dif = response.data.length - messages.length;
+        const newMessages = response.data.slice(-dif);
+        setMessages([...messages, ...newMessages]);
+      }
+    }
+  };
+  //load messages of the selected conversation every 2 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (selectedConversation !== null) {
+        loadMessagesSync();
+      }
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [selectedConversation]);
 
   return (
     <>

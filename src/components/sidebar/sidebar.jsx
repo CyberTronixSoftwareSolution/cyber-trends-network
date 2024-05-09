@@ -125,6 +125,7 @@ const SideBar = (prop) => {
             onClick: () => {
               navigate("/admin/courses");
             },
+            disabled: authUser.role != "Businessman",
           },
           {
             key: "3",
@@ -133,6 +134,7 @@ const SideBar = (prop) => {
             onClick: () => {
               navigate("/admin/jobs");
             },
+            disabled: authUser.role != "Employee",
           },
           {
             key: "4",
@@ -141,6 +143,7 @@ const SideBar = (prop) => {
             onClick: () => {
               navigate("/admin/services");
             },
+            disabled: authUser.role != "Consultant",
           },
           {
             key: "5",
@@ -149,6 +152,7 @@ const SideBar = (prop) => {
             onClick: () => {
               navigate("/admin/chat");
             },
+            disabled: authUser.role != "Consultant",
           },
         ]}
       />

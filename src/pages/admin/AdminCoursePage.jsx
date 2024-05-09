@@ -110,7 +110,7 @@ const AdminCoursePage = () => {
     if (courseData.image) {
       const imageUrl = await uploadImageToCloudinary(
         courseData.image,
-        "TestFold",
+        "YoungNetwork",
         axiosInstance
       );
 
@@ -149,7 +149,7 @@ const AdminCoursePage = () => {
     if (courseData.image && imageType == "object") {
       const imageUrl = await uploadImageToCloudinary(
         courseData.image,
-        "TestFold",
+        "YoungNetwork",
         axiosInstance
       );
 

@@ -145,7 +145,7 @@ const AdminProfilePage = () => {
     if (uploadProfileImage) {
       const imageUrl = await uploadImageToCloudinary(
         uploadProfileImage,
-        "TestFold",
+        "YoungNetwork",
         axiosInstance
       );
 
@@ -299,7 +299,7 @@ const AdminProfilePage = () => {
     if (companyData.image) {
       const imageUrl = await uploadImageToCloudinary(
         companyData.image,
-        "TestFold",
+        "YoungNetwork",
         axiosInstance
       );
 

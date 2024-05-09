@@ -107,7 +107,7 @@ const UserProfile = () => {
     if (uploadProfileImage) {
       const imageUrl = await uploadImageToCloudinary(
         uploadProfileImage,
-        "TestFold",
+        "YoungNetwork",
         axiosInstance
       );
 

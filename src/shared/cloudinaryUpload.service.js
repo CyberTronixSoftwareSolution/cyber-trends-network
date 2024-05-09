@@ -6,7 +6,7 @@ const uploadImageToCloudinary = async (file, folder, axiosInstance) => {
 
   try {
     const response = await axiosInstance.post(
-      "https://api.cloudinary.com/v1_1/dd3v8dwin/image/upload",
+      "https://api.cloudinary.com/v1_1/dil8a7bnc/image/upload",
       formData,
       {
         headers: {

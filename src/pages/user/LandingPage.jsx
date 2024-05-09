@@ -7,7 +7,7 @@ const LandingPage = () => {
   //     try {
   //       const imageUrl = await uploadImageToCloudinary(
   //         file,
-  //         "TestFold",
+  //         "YoungNetwork",
   //         axiosInstance
   //       );
   //       setUploadImage(imageUrl);
